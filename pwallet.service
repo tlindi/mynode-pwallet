@@ -1,0 +1,31 @@
+# pwallet service
+# /etc/systemd/system/pwallet.service
+
+[Unit]
+Description=pwallet
+Wants=www.service docker_images.service phoenixd.service
+After=www.service docker_images.service phoenixd.service
+
+[Service]
+WorkingDirectory=/opt/mynode/pwallet
+
+ExecStartPre=/usr/bin/is_not_shutting_down.sh
+ExecStartPre=/bin/bash -c 'if [ -f /usr/bin/service_scripts/pre_pwallet.sh ]; then /bin/bash /usr/bin/service_scripts/pre_pwallet.sh; fi'
+ExecStart=docker run --rm --name pwallet \
+    --publish 4949:4949 \
+    --volume /mnt/hdd/mynode/pwallet/appsettings.json:/app/appsettings.json \
+    --volume /mnt/hdd/mynode/pwallet/SimpLN.db:/app/SimpLN.db \
+    --volume /mnt/hdd/mynode/pwallet/lnurlp:/app/lnurlp \
+    pwallet
+ExecStartPost=/bin/bash -c 'if [ -f /usr/bin/service_scripts/post_pwallet.sh ]; then /bin/bash /usr/bin/service_scripts/post_pwallet.sh; fi'
+#ExecStop=FILL_IN_EXECSTOP_AND_UNCOMMENT_IF_NEEDED
+ExecStop=docker stop pwallet
+
+Type=simple
+TimeoutSec=120
+Restart=always
+RestartSec=60
+SyslogIdentifier=pwallet
+
+[Install]
+WantedBy=multi-user.target
