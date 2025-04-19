@@ -1,0 +1,65 @@
+{
+    "name": "pWallet",
+    "short_name": "pwallet",
+    "author": {
+        "name": "Hodladi",
+        "link": "https://primal.net/p/npub1sh26ud282kaeqdelypy95g929grat7kr2uhjhn6pdaffg6q6ra4s42gjj5"
+    },
+    "website": {
+        "name": "GitHub",
+        "link": "https://github.com/Hodladi/pWallet"
+    },
+    "category": "lightning_app",
+    "short_description": "Lightning Wallet Server UI",
+    "description": [
+        "pWallet is a lightweight UI for Phoenix Server that allows users to manage their Lightning Wallet with ease."
+    ],
+    "latest_version": "v2.0-tlindi",
+    "supported_archs": null,
+    "download_skip": false,
+    "download_type": "source",
+    "download_source_url": "https://github.com/tlindi/pwallet/archive/refs/tags/{VERSION}.tar.gz",
+    "download_binary_url": {
+        "aarch64": "download_url",
+        "x86_64": "download_url"
+    },
+    "install_env_vars": {},
+    "supports_app_page": true,
+    "supports_testnet": false,
+    "http_port": 4949,
+    "https_port": 4950,
+    "requires_bitcoin": false,
+    "requires_docker_image_installation": true,
+    "requires_electrs": false,
+    "requires_lightning": false,
+    "show_on_application_page": true,
+    "show_on_homepage": true,
+    "show_on_status_page": true,
+    "hide_status_icon": false,
+    "app_tile_name": "pWallet",
+    "app_tile_running_status_text": "Running",
+    "app_tile_button_text": "Info",
+    "app_tile_button_href": "/app/pwallet/info",
+    "app_page_show_open_button": true,
+    "app_page_content": [
+        {
+            "heading": "Instructions",
+            "content": [
+                "Access phoenixd wallet by registering user name and email.",
+                "Only one user registration is possible at this time!",
+                "\n",
+                "More screenshots at https://github.com/Hodladi/pWallet2.0",
+                "Enjoy!"
+            ]
+        }
+    ],
+    "can_uninstall": true,
+    "can_reinstall": true,
+    "can_enable_disable": true,
+    "is_beta": true,
+    "is_premium": false,
+    "homepage_section": "apps",
+    "homepage_order": 91,
+    "app_type": "custom",
+    "sdk_version": 2
+}
