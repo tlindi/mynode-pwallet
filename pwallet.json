@@ -1,5 +1,5 @@
 {
-    "name": "pWallet",
+    "name": "pWallet2.0.7",
     "short_name": "pwallet",
     "author": {
         "name": "Hodladi",
@@ -7,18 +7,18 @@
     },
     "website": {
         "name": "GitHub",
-        "link": "https://github.com/Hodladi/pWallet"
+        "link": "https://github.com/Hodladi/pWallet2.0"
     },
     "category": "lightning_app",
     "short_description": "Lightning Wallet Server UI",
     "description": [
-        "pWallet is a lightweight UI for Phoenix Server that allows users to manage their Lightning Wallet with ease."
+        "pWallet2.0 is a lightweight UI for phoenixd server wallet and allows users to access their lightning wallet with ease."
     ],
-    "latest_version": "v2.0-tlindi",
+    "latest_version": "v4",
     "supported_archs": null,
     "download_skip": false,
     "download_type": "source",
-    "download_source_url": "https://github.com/tlindi/pwallet/archive/refs/tags/{VERSION}.tar.gz",
+    "download_source_url": "https://github.com/Hodladi/pWallet2.0/archive/refs/tags/{VERSION}.tar.gz",
     "download_binary_url": {
         "aarch64": "download_url",
         "x86_64": "download_url"
@@ -36,7 +36,7 @@
     "show_on_homepage": true,
     "show_on_status_page": true,
     "hide_status_icon": false,
-    "app_tile_name": "pWallet",
+    "app_tile_name": "pWallet2.0.7",
     "app_tile_running_status_text": "Running",
     "app_tile_button_text": "Info",
     "app_tile_button_href": "/app/pwallet/info",
@@ -45,10 +45,11 @@
         {
             "heading": "Instructions",
             "content": [
-                "Access phoenixd wallet by registering user name and email.",
+                "Requires phoenixd v0.5.1 running locally and its config in folder:",
+                "/mnt/hdd/mynode/phoenixd/phoenix.conf",
+                "Then register user name and email to pWallet2.0 UI.",
                 "Only one user registration is possible at this time!",
-                "\n",
-                "More screenshots at https://github.com/Hodladi/pWallet2.0",
+                "Use pWallet to access all phoenixd functions!",
                 "Enjoy!"
             ]
         }
@@ -56,7 +57,7 @@
     "can_uninstall": true,
     "can_reinstall": true,
     "can_enable_disable": true,
-    "is_beta": true,
+    "is_beta": false,
     "is_premium": false,
     "homepage_section": "apps",
     "homepage_order": 91,
