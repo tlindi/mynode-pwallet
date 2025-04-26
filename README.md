@@ -15,6 +15,3 @@ TAKE, KEEP AND VERYFY BACKUP DATA RESTORABILITY BY YOURSELF!
 ### Installation and startup fixes
 * Installation done only if phoenixd configuration is found.
 * starts only after phoenixd service.
-
-### install time variable setting
-* make sed to end of line from "ApiPassword" always cause "SET BY USER" might have been "nulled" previous faulty run
