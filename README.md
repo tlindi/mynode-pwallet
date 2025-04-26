@@ -1,4 +1,6 @@
-./dist contains .tar.gz to be uploaded onto MyNodeBTC Marketplace Community App.
+ MyNodeBTC Marketplace Community App from https://github.com/Hodladi/pWallet2.0
+
+./dist contains .tar.gz to be uploaded
 
 NO WARRANTIES OF ANY KIND!
 
@@ -6,6 +8,9 @@ TAKE, KEEP AND VERYFY BACKUP DATA RESTORABILITY BY YOURSELF!
 ---
 
 [X] nothing ToDo
+
+### pWallet version
+* v2.0.9 (v8)
 
 ### service starting
 # Completed improvements
