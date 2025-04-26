@@ -1,5 +1,5 @@
 {
-    "name": "pWallet2.0.7",
+    "name": "pWallet2.0.9",
     "short_name": "pwallet",
     "author": {
         "name": "Hodladi",
@@ -14,7 +14,7 @@
     "description": [
         "pWallet2.0 is a lightweight UI for phoenixd server wallet and allows users to access their lightning wallet with ease."
     ],
-    "latest_version": "v4",
+    "latest_version": "v8",
     "supported_archs": null,
     "download_skip": false,
     "download_type": "source",
@@ -36,7 +36,7 @@
     "show_on_homepage": true,
     "show_on_status_page": true,
     "hide_status_icon": false,
-    "app_tile_name": "pWallet2.0.7",
+    "app_tile_name": "pWallet2.0.9",
     "app_tile_running_status_text": "Running",
     "app_tile_button_text": "Info",
     "app_tile_button_href": "/app/pwallet/info",

@@ -4,6 +4,7 @@
 [Unit]
 Description=pwallet
 Wants=www.service docker_images.service phoenixd.service
+Wants=phoenixd.service
 After=www.service docker_images.service phoenixd.service
 
 [Service]
