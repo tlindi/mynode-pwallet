@@ -27,7 +27,7 @@ if [ ! -f "$PHOENIX_CONF" ]; then
     exit 1
 fi
 
-#   Verify if pwallet configuration file exists, and create if needed
+# Verify if pwallet configuration file exists, and create if needed
 if [ ! -f "$PWALLET_CONF" ]; then
     echo "Creating stub for configuration file '$PWALLET_CONF' cause it does not exist."
     mkdir -p /mnt/hdd/mynode/pwallet || { echo "Error: Failed to create directory /mnt/hdd/mynode/pwallet" >&2; exit 1; }
@@ -39,14 +39,25 @@ fi
 # Set API_URL and update it in PWALLET_CONF
 export API_URL="http://172.17.0.1:9740"
 
+# Disable xtrace to hide password from being logging
+set +x
+
 # Extract API_PASSWORD from phoenix.conf and verify it's not empty
 export API_PASSWORD=$(grep '^http-password=' "$PHOENIX_CONF" | cut -d'=' -f2)
 if [ -z "$API_PASSWORD" ]; then
     echo "Error: API password in $PHOENIX_CONF is empty. Please set a valid 'http-password'." >&2
     exit 1
 fi
+# Print API_PASSWORD mock value for logging
+echo "export API_PASSWORD=****************************************************************"
+# Re-enable xtrace if needed
+set -x
 
-sed -i -E "s|(\"ApiPassword\":\s*\")[^\"]*(\",?)|\1${API_PASSWORD}\2|" "$PWALLET_CONF"
+# Now that API_PASSWORD is defined, set up xtrace redirection to filter it away also in future log entries
+exec 7> >(sed "s|${API_PASSWORD}|****************************************************************|g" >&2)
+export BASH_XTRACEFD=7
+export PS4='+ '
+
 sed -i -E "s|(\"ApiUrl\":\s*\")[^\"]*(\",?)|\1${API_URL}\2|" "$PWALLET_CONF"
 sed -i -E "s|(\"UiDomain\":\s*\")[^\"]*(\",?)|\1${PWALLET_UIDOMAIN}\2|" "$PWALLET_CONF"
 sed -i -E "s|(\"LnUrlpDomain\":\s*\")[^\"]*(\",?)|\1${PWALLET_LNURLP_DOMAIN}\2|" "$PWALLET_CONF"
