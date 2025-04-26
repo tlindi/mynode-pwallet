@@ -1,3 +1,5 @@
+Deploys https://github.com/Hodladi/pWallet2.0 to MyNodeBTC
+---
 ./dist contains .tar.gz to be uploaded onto MyNodeBTC Marketplace Community App.
 
 NO WARRANTIES OF ANY KIND!
