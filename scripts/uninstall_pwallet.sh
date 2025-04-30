@@ -27,7 +27,7 @@ backup_pwallet_data() {
 
     export BACKUP_PWALLET_VERSION=$(cat "$BACKUP_PATH/pwallet_version")
     export BACKUP_TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-    export BACKUP_FILE="$BACKUP_PATH/phoenixd-$PWALLET_VERSION-$BACKUP_TIMESTAMP.tgz"
+    export BACKUP_FILE="$BACKUP_PATH/pwallet-$PWALLET_VERSION-$BACKUP_TIMESTAMP.tgz"
 
     echo "Backing up pWallet data..."
     echo "Source: $(pwd)"
