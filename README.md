@@ -8,14 +8,18 @@ TAKE, KEEP AND VERYFY BACKUP DATA RESTORABILITY BY YOURSELF!
 ---
 
 ### ToDo
-[X] nothing 
+- [X] nothing
 
 ### pWallet version
-* v2.0.9 (v8)
+* v2.1.0 (v9)
+
+### Backup & Restore
+* App uninstall creates appsettings.json, database and LNURL folder backup and
+* during (re)install they are restored, if existing backup is found.
 
 ### Installation and startup fixes
 * Installation done only if phoenixd configuration is found.
-* starts only after phoenixd service.
+* Starts only after phoenixd service.
 
-### install time variable setting
+### Install time variable setting
 * make sed to end of line from "ApiPassword" always cause "SET BY USER" might have been "nulled" previous faulty run
