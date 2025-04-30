@@ -25,7 +25,7 @@ backup_pwallet_data() {
         chown bitcoin:bitcoin "$BACKUP_PATH" || { echo "Backup path owner couldn't be set."; exit 1; }
     fi
 
-    export BACKUP_PWALLET_VERSION=$(cat "$BACKUP_PATH/pwallet_version")
+    export PWALLET_VERSION=$(cat "$BACKUP_PATH/pwallet_version")
     export BACKUP_TIMESTAMP=$(date +%Y%m%d_%H%M%S)
     export BACKUP_FILE="$BACKUP_PATH/pwallet-$PWALLET_VERSION-$BACKUP_TIMESTAMP.tgz"
 

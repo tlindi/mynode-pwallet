@@ -86,7 +86,7 @@ create_lnurlp_structure() {
         cp -av wwwroot/.well-known/lnurlp "$PWALLET_DATA/"
         chgrp -R bitcoin "$PWALLET_LNURLP"
         chmod -R g+w "$PWALLET_LNURLP"
-        cp -a "$PWALLET_LNURLP/zap.example" "$PWALLET_LNURLP/$PWALLET_LNURLP_USER"
+        mv "$PWALLET_LNURLP/zap.example" "$PWALLET_LNURLP/$PWALLET_LNURLP_USER"
     fi
 }
 
