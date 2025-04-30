@@ -12,6 +12,7 @@ trap 'echo "Error occurred at $(basename "$0") line $LINENO. status $?"; exit 1'
 
 # 1. Set environment variables for configuration.
 set_configuration_env() {
+    export PHOENIX_API_URL="http://172.17.0.1:9740"
     export PHOENIX_DIR="/mnt/hdd/mynode/phoenixd"
     export PHOENIX_CONF="${PHOENIX_DIR}/phoenix.conf"
     export PWALLET_DATA="/mnt/hdd/mynode/pwallet"
@@ -42,7 +43,7 @@ restore_backup_data() {
         echo "pwallet $VERSION will be populated by default data."
     else
         export BACKUP_FILE=$(ls -1 "$PWALLET_BACKUP_DIR"/*.tgz 2>/dev/null | \
-            sed -E 's/.*(.{15})\.tar\.gz$/\1|\0/' | sort | tail -1 | cut -d'|' -f2-)
+            sed -E 's/.*(.{15})\.tgz$/\1|\0/' | sort | tail -1 | cut -d'|' -f2-)
         if [ -n "$BACKUP_FILE" ]; then
             tar xzvf "$BACKUP_FILE" --strip-components=1 -C "$PWALLET_DATA"
         else
@@ -60,7 +61,6 @@ create_appsettings() {
 
 # 5. Set API credentials.
 set_api_credentials() {
-    export API_URL="http://172.17.0.1:9740"
     set +x
     export API_PASSWORD=$(grep '^http-password=' "$PHOENIX_CONF" | cut -d'=' -f2)
     if [ -z "$API_PASSWORD" ]; then
@@ -95,8 +95,9 @@ update_appsettings() {
     exec 7> >(sed "s|${API_PASSWORD}|****************************************************************|g" >&2)
     export BASH_XTRACEFD=7
     export PS4='+ '
-    
-    sed -i -E "s|(\"ApiUrl\":\s*\")[^\"]*(\",?)|\1${API_URL}\2|" "$PWALLET_CONF"
+
+    sed -i -E "s|(\"ApiUrl\":\s*\")[^\"]*(\",?)|\1${PHOENIX_API_URL}\2|" "$PWALLET_CONF"
+    sed -i -E "s|(\"ApiPassword\":\s*\")[^\"]*(\",?)|\1${API_PASSWORD}\2|" "$PWALLET_CONF"
     sed -i -E "s|(\"UiDomain\":\s*\")[^\"]*(\",?)|\1${PWALLET_UIDOMAIN}\2|" "$PWALLET_CONF"
     sed -i -E "s|(\"LnUrlpDomain\":\s*\")[^\"]*(\",?)|\1${PWALLET_LNURLP_DOMAIN}\2|" "$PWALLET_CONF"
 }
