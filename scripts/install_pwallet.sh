@@ -15,6 +15,7 @@ set_configuration_env() {
     export PHOENIX_API_URL="http://172.17.0.1:9740"
     export PHOENIX_DIR="/mnt/hdd/mynode/phoenixd"
     export PHOENIX_CONF="${PHOENIX_DIR}/phoenix.conf"
+    export PWALLET_BACKUP_DIR="/mnt/hdd/mynode/pwallet_backup"
     export PWALLET_DATA="/mnt/hdd/mynode/pwallet"
     export PWALLET_CONF="${PWALLET_DATA}/appsettings.json"
     export PWALLET_UIDOMAIN=yourdomain.com
@@ -35,9 +36,8 @@ phoenixd_exists() {
     fi
 }
 
-# 3. Restore configuration from backup.
+# 3. Restore configuration from backup
 restore_backup_data() {
-    export PWALLET_BACKUP_DIR="/mnt/hdd/mynode/pwallet_backup"
     if [ ! -d "$PWALLET_BACKUP_DIR" ]; then
         mkdir -p "$PWALLET_BACKUP_DIR" || { echo "Backup path '$PWALLET_BACKUP_DIR' couldn't be created."; exit 1; }
         echo "pwallet $VERSION will be populated by default data."
@@ -52,14 +52,14 @@ restore_backup_data() {
     fi
 }
 
-# 4. Create the appsettings.json from a stub.
+# 4. Create the appsettings.json from a stub
 create_appsettings() {
     cp -a appsettings.json "$PWALLET_CONF" || { echo "Error: Failed to copy stub to $PWALLET_CONF" >&2; exit 1; }
     chgrp docker "$PWALLET_CONF" || { echo "Error: Failed to change group ownership of $PWALLET_CONF" >&2; exit 1; }
     chmod g+w "$PWALLET_CONF" || { echo "Error: Failed to set group write permission on $PWALLET_CONF" >&2; exit 1; }
 }
 
-# 5. Set API credentials.
+# 5. Set API credentials
 set_api_credentials() {
     set +x
     export API_PASSWORD=$(grep '^http-password=' "$PHOENIX_CONF" | cut -d'=' -f2)
@@ -70,7 +70,7 @@ set_api_credentials() {
     set -x
 }
 
-# 6. Create the database stub.
+# 6. Create the database stub
 create_database_stub() {
     export PWALLET_DB="${PWALLET_DATA}/SimpLN.db"
     if [ ! -f "$PWALLET_DB" ]; then
@@ -80,7 +80,7 @@ create_database_stub() {
     fi
 }
 
-# 7. Create the LNURLp folder structure.
+# 7. Create the LNURLp folder structure
 create_lnurlp_structure() {
     if [ ! -d "$PWALLET_LNURLP" ]; then
         cp -av wwwroot/.well-known/lnurlp "$PWALLET_DATA/"
@@ -90,7 +90,7 @@ create_lnurlp_structure() {
     fi
 }
 
-# 8. Update appsettings.
+# 8. Update appsettings
 update_appsettings() {
     exec 7> >(sed "s|${API_PASSWORD}|****************************************************************|g" >&2)
     export BASH_XTRACEFD=7
@@ -102,9 +102,18 @@ update_appsettings() {
     sed -i -E "s|(\"LnUrlpDomain\":\s*\")[^\"]*(\",?)|\1${PWALLET_LNURLP_DOMAIN}\2|" "$PWALLET_CONF"
 }
 
-# --- Main Execution Block (≈10 lines) ---
+# 9. Version backup
+version_backup() {
+    if [ ! -d "$PWALLET_BACKUP_DIR" ]; then
+        mkdir -p "$PWALLET_BACKUP_DIR"
+        chgrp -R bitcoin "$PWALLET_BACKUP_DIR"
+        chmod -R g+w "$PWALLET_BACKUP_DIR"
+    fi
+	
+	echo $VERSION > "$PWALLET_BACKUP_DIR/pwallet_version"
+}
 
-# Prepare the service working directory.
+# Make service working directory.
 mkdir -p /opt/mynode/pwallet || true
 
 # Set environment variables.
@@ -126,7 +135,7 @@ if [ ! -f "$PWALLET_CONF" ]; then
     fi
 fi
 
-echo $VERSION > "$PWALLET_BACKUP_DIR/pwallet_version"
+version_backup
 
 docker build -t pwallet .
 
