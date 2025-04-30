@@ -14,7 +14,8 @@ TAKE, KEEP AND VERYFY BACKUP DATA RESTORABILITY BY YOURSELF!
 * v2.1.0 (v9)
 
 ### Backup & Restore
-* App installation restores appsettings.json and database + LNURL folder if existing backup is found
+* App uninstall creates appsettings.json, database and LNURL folder backup and
+* during (re)install they are restored, if existing backup is found.
 
 ### Installation and startup fixes
 * Installation done only if phoenixd configuration is found.
