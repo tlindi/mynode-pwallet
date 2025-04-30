@@ -18,7 +18,7 @@ backup_pwallet_data() {
     cd "$PWALLET_DATA" || exit 1
     echo "Changed directory to $(pwd)"
     
-    export BACKUP_PATH="../phoenixd_backup"
+    export BACKUP_PATH="../pwallet_backup"
 
     if [ ! -d "$BACKUP_PATH" ]; then 
         mkdir -p "$BACKUP_PATH" || { echo "Backup path '$BACKUP_PATH' couldn't be created."; exit 1; }
@@ -27,7 +27,7 @@ backup_pwallet_data() {
 
     export BACKUP_PWALLET_VERSION=$(cat "$BACKUP_PATH/pwallet_version")
     export BACKUP_TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-    export BACKUP_FILE="$BACKUP_PATH/phoenixd-$PWALLET_VERSION-$BACKUP_TIMESTAMP.tar.gz"
+    export BACKUP_FILE="$BACKUP_PATH/phoenixd-$PWALLET_VERSION-$BACKUP_TIMESTAMP.tgz"
 
     echo "Backing up pWallet data..."
     echo "Source: $(pwd)"

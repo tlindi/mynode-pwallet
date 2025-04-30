@@ -41,10 +41,10 @@ restore_backup_data() {
         mkdir -p "$PWALLET_BACKUP_DIR" || { echo "Backup path '$PWALLET_BACKUP_DIR' couldn't be created."; exit 1; }
         echo "pwallet $VERSION will be populated by default data."
     else
-        export BACKUP_FILE=$(ls -1 "$PWALLET_BACKUP_DIR"/*.tar.gz 2>/dev/null | \
+        export BACKUP_FILE=$(ls -1 "$PWALLET_BACKUP_DIR"/*.tgz 2>/dev/null | \
             sed -E 's/.*(.{15})\.tar\.gz$/\1|\0/' | sort | tail -1 | cut -d'|' -f2-)
         if [ -n "$BACKUP_FILE" ]; then
-            tar xzvf "$BACKUP_FILE" --strip-components=1 -C "$PWALLET_BACKUP_DIR"
+            tar xzvf "$BACKUP_FILE" --strip-components=1 -C "$PWALLET_DATA"
         else
             echo "No restoreable backup was found."
         fi
@@ -125,6 +125,8 @@ if [ ! -f "$PWALLET_CONF" ]; then
     fi
 fi
 
-echo $VERSION > "$PWALLET_DATA/pwallet_version"
+echo $VERSION > "$PWALLET_BACKUP_DIR/pwallet_version"
+
 docker build -t pwallet .
+
 echo "================== DONE INSTALLING APP ================="
