@@ -138,5 +138,6 @@ fi
 version_backup
 
 docker build -t pwallet .
+docker image prune -f
 
 echo "================== DONE INSTALLING APP ================="
