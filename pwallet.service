@@ -19,7 +19,7 @@ ExecStart=docker run --rm --name pwallet \
     --volume /mnt/hdd/mynode/pwallet/lnurlp:/app/lnurlp \
     pwallet
 ExecStartPost=/bin/bash -c 'if [ -f /usr/bin/service_scripts/post_pwallet.sh ]; then /bin/bash /usr/bin/service_scripts/post_pwallet.sh; fi'
-#ExecStop=FILL_IN_EXECSTOP_AND_UNCOMMENT_IF_NEEDED
+
 ExecStop=docker stop pwallet
 
 Type=simple

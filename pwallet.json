@@ -1,5 +1,5 @@
 {
-    "name": "pWallet2.1.0",
+    "name": "pWallet2.1.0A",
     "short_name": "pwallet",
     "author": {
         "name": "Hodladi",
@@ -45,7 +45,7 @@
         {
             "heading": "Instructions",
             "content": [
-                "Requires phoenixd v0.5.1 running locally and its config in folder:",
+                "Requires phoenixd v0.5.1 or later running locally and its config in folder:",
                 "/mnt/hdd/mynode/phoenixd/phoenix.conf",
                 "Then register user name and email to pWallet2.0 UI.",
                 "Only one user registration is possible at this time!",

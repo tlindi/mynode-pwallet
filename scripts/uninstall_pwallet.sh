@@ -11,6 +11,7 @@ echo "==================== UNINSTALLING APP ===================="
 echo Setting trap to detect errors. Following is not error:
 trap 'echo "Error occurred at $(basename "$0") line $LINENO. status $?"; exit 1' ERR
 
+export APP=pwallet
 export PWALLET_DATA=/mnt/hdd/mynode/pwallet
 
 backup_pwallet_data() {
@@ -60,6 +61,17 @@ else
     fi
 fi
 
-docker rmi pwallet || echo "Docker image for pWallet does not exist."
+docker rmi "$APP" || echo "Docker image for "$APP" does not exist."
+# Remove Docker images related to $APP
+if docker images --format '{{.Repository}}:{{.Tag}} {{.ID}}' | grep -q "$APP"; then
+    docker images --format '{{.Repository}}:{{.Tag}} {{.ID}}' \
+      | grep "$APP" \
+      | awk '{print $2}' \
+      | sort -u \
+      | xargs -r docker rmi -f
+else
+    echo "No $APP images found, skipping $APP removal."
+fi
+
 
 echo "================== DONE UNINSTALLING APP ================="
