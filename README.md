@@ -4,11 +4,14 @@
 
 NO WARRANTIES OF ANY KIND!
 
-TAKE, KEEP AND VERYFY BACKUP DATA RESTORABILITY BY YOURSELF!
+TAKE, KEEP AND VERIFY BACKUP DATA RESTORABILITY BY YOURSELF!
 ---
 
 ### ToDo
 - [X] nothing
+
+### pWallet version
+* v2.1.0A (v9) - Fixed uninstall and changed docker build name
 
 ### pWallet version
 * v2.1.0 (v9)

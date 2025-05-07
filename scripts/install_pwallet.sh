@@ -12,6 +12,7 @@ trap 'echo "Error occurred at $(basename "$0") line $LINENO. status $?"; exit 1'
 
 # 1. Set environment variables for configuration.
 set_configuration_env() {
+    export APP=pwallet
     export PHOENIX_API_URL="http://172.17.0.1:9740"
     export PHOENIX_DIR="/mnt/hdd/mynode/phoenixd"
     export PHOENIX_CONF="${PHOENIX_DIR}/phoenix.conf"
@@ -137,6 +138,7 @@ fi
 
 version_backup
 
-docker build -t pwallet .
+docker build -t $APP/$APP:$VERSION .
+docker tag $APP/$APP:$VERSION $APP
 
 echo "================== DONE INSTALLING APP ================="
