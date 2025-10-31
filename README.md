@@ -11,6 +11,9 @@ TAKE, KEEP AND VERIFY BACKUP DATA RESTORABILITY BY YOURSELF!
 - [X] nothing
 
 ### pWallet version
+* v2.1.0a (v9) - Fixed uninstall and changed docker build name and 
+
+### pWallet version
 * v2.1.0 (v9)
 
 ### Backup & Restore
