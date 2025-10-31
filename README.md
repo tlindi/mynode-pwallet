@@ -4,7 +4,9 @@
 
 NO WARRANTIES OF ANY KIND!
 
-TAKE, KEEP AND VERIFY BACKUP DATA RESTORABILITY BY YOURSELF!
+**TAKE, KEEP AND VERIFY BACKUP DATA RESTORABILITY BY YOURSELF!**
+* Even install and uninstall do and restore backups,
+  and fund are not on pWallet but phonixd.
 ---
 
 ### ToDo
